@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.harvey.nr_tools">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -17,8 +19,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DeviceInfoActivity"
+        <activity
+            android:name=".DeviceInfoActivity"
             android:label="手机信息"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PerformanceActivity"
+            android:label="性能信息"
+            android:screenOrientation="portrait" />
+        <activity android:name=".IMSIActivity"
+            android:label="运营商信息"
+            android:screenOrientation="portrait"
             ></activity>
     </application>
 
