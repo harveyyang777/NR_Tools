@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
-    String[] functions={"1.手机信息","2.性能信息（需root权限）","3.切换host（需root权限）","4.发送图片","5.发送ANR","6.修改aid（需root权限）","7.运营商信息","点击查看是否已获取root权限"};
+    String[] functions={"1.手机信息","2.性能信息（需root权限）","3.切换host（需root权限）","4.发送图片","5.发送ANR","6.修改aid（需root权限）","7.运营商信息","8.设置默认发送邮箱","点击查看是否已获取root权限"};
 
     ArrayAdapter<String> adpFunc;
 
@@ -37,10 +37,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 1:
                 performanceInfo();
             break;
+            case 4:
+                Utils.InfoUtils.sendAnr(this);
+                break;
             case 6:
                 IMSIInfo();
                 break;
-            case 7:
+            case 8:
                 String sRoot=Utils.InfoUtils.checkRoot();
                 functions[7]="root权限："+sRoot;
                 adpFunc.notifyDataSetChanged();
