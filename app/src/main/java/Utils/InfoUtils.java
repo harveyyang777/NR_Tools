@@ -9,6 +9,15 @@ import java.io.File;
 
 public class InfoUtils {
 
+    public static final String crash= "http://trace-abord.cm.ijinshan.com/traceRate/";
+    public  static final String mp="http://mp.cm.ksmobile.com/CloudMsgAdv?pkg=instanews&func_type=2&config_type=";
+    public static final String mpt="http://test.mp.cm.ksmobile.com/CloudMsgAdv?pkg=instanews&func_type=2&config_type=INSTANEWS#";
+    public static final String bugfree="http://bug.oa.ijinshan.com/bugfree/bug/list/50?productmodule_id=1003";
+    public static final String pgy="https://www.pgyer.com/lnNR";
+    public static final String path="http://10.60.80.70/cmnewsindia/";
+    public static final String hudson="http://scm.bj.ijinshan.com/hudson/";
+
+
     public  static  String getAid(){
         String androidId=" ";
       //  androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
@@ -76,7 +85,7 @@ public class InfoUtils {
 
         it.putExtra(Intent.EXTRA_SUBJECT, "手机信息");
         it.putExtra(Intent.EXTRA_TEXT, s);
-        context.startActivity(Intent.createChooser(it,"deviceInfo"));
+        context.startActivity(Intent.createChooser(it,"将手机信息发送到..."));
     }
 
     public static void sendAnr(Context context){
@@ -100,7 +109,51 @@ public class InfoUtils {
         it.putExtra(Intent.EXTRA_SUBJECT, "anr");
         context.startActivity(Intent.createChooser(it,"发送anr到..."));
 
+    }
+
+
+    public static void sendHost(Context context){
+
+        Intent it=new Intent(Intent.ACTION_SEND);
+     //   Intent it=new Intent(Intent.ACTION_VIEW);
+        it.setType("*/*");
+        String filePath="/etc/hosts";
+
+        File file=new File(filePath);
+        Toast.makeText(context,file.getPath().toString(),Toast.LENGTH_LONG).show();
+        it.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        // it.putExtra(Intent.EXTRA_STREAM,uri);
+
+        it.putExtra(Intent.EXTRA_SUBJECT, "hosts");
+        context.startActivity(Intent.createChooser(it,"发送hosts文件到..."));
 
     }
+
+    public static void viewHost(Context context){
+
+        Intent it=new Intent(Intent.ACTION_VIEW);
+        it.setType("*/*");
+        String filePath="/etc/hosts";
+        File file=new File(filePath);
+       it.setData(Uri.fromFile(file));
+       context.startActivity(Intent.createChooser(it,"选择打开方式"));
+    }
+
+    public static void installApk(Context context){
+
+
+        Uri uri = Uri.parse(path);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+
+       context.startActivity(intent);
+
+
+    }
+
+
+
+
+
 
 }

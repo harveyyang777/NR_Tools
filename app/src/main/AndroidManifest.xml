@@ -3,7 +3,7 @@
     package="com.example.harvey.nr_tools">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -28,10 +28,17 @@
             android:name=".PerformanceActivity"
             android:label="性能信息"
             android:screenOrientation="portrait" />
-        <activity android:name=".IMSIActivity"
+        <activity
+            android:name=".IMSIActivity"
             android:label="运营商信息"
-            android:screenOrientation="portrait"
-            ></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChangeHostActivity"
+            android:label="切换host"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SitesActivity"
+            android:label="测试常用地址"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

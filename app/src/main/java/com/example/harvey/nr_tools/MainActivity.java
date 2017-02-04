@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
-    String[] functions={"1.手机信息","2.性能信息（需root权限）","3.切换host（需root权限）","4.发送图片","5.发送ANR","6.修改aid（需root权限）","7.运营商信息","8.设置默认发送邮箱","点击查看是否已获取root权限"};
+    String[] functions={"1.手机信息","2.性能信息（需root权限）","3.切换host（需root权限）","4.发送图片","5.发送ANR","6.修改aid（需root权限）","7.运营商信息","8.常用地址","点击查看是否已获取root权限"};
 
     ArrayAdapter<String> adpFunc;
 
@@ -36,12 +36,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             break;
             case 1:
                 performanceInfo();
-            break;
+                break;
+            case 2:
+                changeHost();
+                break;
             case 4:
                 Utils.InfoUtils.sendAnr(this);
                 break;
             case 6:
                 IMSIInfo();
+                break;
+            case 7:
+                site();
                 break;
             case 8:
                 String sRoot=Utils.InfoUtils.checkRoot();
@@ -68,6 +74,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void IMSIInfo(){
         Intent it=new Intent();
         it.setClass(this,IMSIActivity.class);
+        startActivity(it);
+
+    }
+
+    public void changeHost(){
+
+        Intent it=new Intent();
+        it.setClass(this,ChangeHostActivity.class);
+        startActivity(it);
+
+    }
+
+    public void site(){
+
+        Intent it=new Intent();
+        it.setClass(this,SitesActivity.class);
         startActivity(it);
 
     }
