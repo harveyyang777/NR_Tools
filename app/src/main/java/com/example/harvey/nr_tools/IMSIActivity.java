@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class IMSIActivity extends AppCompatActivity implements AdapterView.OnItemLongClickListener{
 
@@ -56,10 +57,16 @@ public class IMSIActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void init(){
-        list[0]=list[0]+getIMSI();
-        list[1]=list[1]+getMCC();
-        list[2]=list[2]+ getMNC();
-        adp.notifyDataSetChanged();
+
+        if(getIMSI().length()!=0){
+            list[0]=list[0]+getIMSI();
+            list[1]=list[1]+getMCC();
+            list[2]=list[2]+ getMNC();
+            adp.notifyDataSetChanged();
+
+        }else {
+            Toast.makeText(this,"未插卡",Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -72,7 +79,13 @@ public class IMSIActivity extends AppCompatActivity implements AdapterView.OnIte
 
         imsi=telManager.getSubscriberId();
 
-        return imsi;
+
+
+        if(imsi.length()!=0){
+            return imsi;
+        }else {
+            return "";
+        }
     }
 
     public String getMCC(){

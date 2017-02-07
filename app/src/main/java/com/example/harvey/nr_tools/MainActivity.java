@@ -1,7 +1,16 @@
 package com.example.harvey.nr_tools;
 
+import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,7 +19,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
-    String[] functions={"1.手机信息","2.性能信息（需root权限）","3.切换host（需root权限）","4.发送图片","5.发送ANR","6.修改aid（需root权限）","7.运营商信息","8.常用地址","点击查看是否已获取root权限"};
+    String[] functions={"1.手机信息","2.性能信息（需root权限）","3.生成host文件","4.发送一条通知","5.发送ANR","6.查看aid"};
 
     ArrayAdapter<String> adpFunc;
 
@@ -23,13 +32,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ListView lv=(ListView)findViewById(R.id.lv);
         lv.setAdapter(adpFunc);
         lv.setOnItemClickListener(this);
+
+        requestPermission();//申请运行时权限
+
+       // InfoUtils.checkRoot();
+
+
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-
         switch (position){
             case 0:
                 deviceInfo();
@@ -40,19 +52,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 2:
                 changeHost();
                 break;
+            case 3:
+                sendaNotification();
+                break;
             case 4:
                 Utils.InfoUtils.sendAnr(this);
                 break;
-            case 6:
-                IMSIInfo();
+            case 5:
+                changeAid();
                 break;
-            case 7:
+
+            case 6:
                 site();
                 break;
-            case 8:
-                String sRoot=Utils.InfoUtils.checkRoot();
-                functions[7]="root权限："+sRoot;
-                adpFunc.notifyDataSetChanged();
+
 
         }
     }
@@ -91,6 +104,70 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent it=new Intent();
         it.setClass(this,SitesActivity.class);
         startActivity(it);
+
+    }
+
+    public void changeAid(){
+
+        Intent it=new Intent();
+        it.setClass(this,ChangeAidActivity.class);
+        startActivity(it);
+
+    }
+
+    public void requestPermission( )
+    {
+
+
+
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)
+        {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},10001);
+        } else
+        {
+
+        }
+
+        /*
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED)
+        {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_PHONE_STATE},10002);
+        } else
+        {
+
+        }
+        */
+    }
+
+    public void sendaNotification(){
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("http://www.baidu.com"));
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+
+        //1.获取系统通知的管理者
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //2.用notification工厂 创建一个notification
+        Notification noti = new Notification.Builder(this)
+                .setContentTitle("一条系统通知")
+                .setContentText("nr测试")
+                .setSmallIcon(R.drawable.icon1)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon))
+                .setContentIntent(contentIntent)
+                .build();
+        //3.把notification显示出来
+        nm.notify(1, noti);
 
     }
 

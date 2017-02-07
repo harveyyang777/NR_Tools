@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -34,10 +37,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ChangeHostActivity"
-            android:label="切换host"
+            android:label="hosts"
             android:screenOrientation="portrait" />
-        <activity android:name=".SitesActivity"
+        <activity
+            android:name=".SitesActivity"
             android:label="测试常用地址"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ChangeAidActivity"
+            android:label="修改aid"
             android:screenOrientation="portrait"></activity>
     </application>
 

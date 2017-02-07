@@ -11,6 +11,13 @@
     tools:context="com.example.harvey.nr_tools.ChangeHostActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:text="请选择要生成的环境配置："
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:textSize="24sp" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -19,18 +26,17 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checkedButton="@+id/radioButton3"
             android:id="@+id/rg">
 
             <RadioButton
-                android:text="170"
+                android:text="170测试环境"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButton"
                 android:layout_weight="1" />
 
             <RadioButton
-                android:text="152"
+                android:text="152测试环境"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButton2"
@@ -45,11 +51,39 @@
         </RadioGroup>
 
         <TextView
-            android:text="当前host："
+            android:text="hosts文件位置：root/etc/hosts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txvPath" />
+
+        <TextView
+            android:text="新生成文件位置：root/sdcard/hosts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/newPath" />
+
+        <TextView
+            android:text="当前手机host配置:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/textView2"
             android:onClick="changeToProduct" />
+
+        <TextView
+            android:text="新生成的hosts配置"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView7" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/newcontent" />
 
     </LinearLayout>
 

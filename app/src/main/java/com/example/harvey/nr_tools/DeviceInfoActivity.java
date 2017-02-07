@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 public class DeviceInfoActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener{
 
-    String[] list={"aid: ","分变率:","网络状态:","brand:","系统版本：","model:"," ","提示：\n长按信息可发送，长按这里可将全部信息发送"};
+    String[] list={"aid:","分变率:","网络状态:","brand:","系统版本：","model:"," ","提示：\n长按信息可发送，长按这里可将全部信息发送"};
     ArrayAdapter<String> adp ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +45,12 @@ public class DeviceInfoActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position){
+
+
             case 2:
                 list[2]="网络状态："+Utils.InfoUtils.getNetInfo(this);
                 adp.notifyDataSetChanged();
                 break;
-
         }
     }
 

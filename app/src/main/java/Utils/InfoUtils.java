@@ -120,7 +120,7 @@ public class InfoUtils {
         String filePath="/etc/hosts";
 
         File file=new File(filePath);
-        Toast.makeText(context,file.getPath().toString(),Toast.LENGTH_LONG).show();
+      //  Toast.makeText(context,file.getPath().toString(),Toast.LENGTH_LONG).show();
         it.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
         // it.putExtra(Intent.EXTRA_STREAM,uri);
 
@@ -129,14 +129,28 @@ public class InfoUtils {
 
     }
 
-    public static void viewHost(Context context){
+    public static void sendFile(Context context,String Path){
 
-        Intent it=new Intent(Intent.ACTION_VIEW);
+        Intent it=new Intent(Intent.ACTION_SEND);
         it.setType("*/*");
-        String filePath="/etc/hosts";
-        File file=new File(filePath);
-       it.setData(Uri.fromFile(file));
-       context.startActivity(Intent.createChooser(it,"选择打开方式"));
+        File file=new File(path);
+
+        it.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        it.putExtra(Intent.EXTRA_SUBJECT, "文件");
+        context.startActivity(Intent.createChooser(it,"发送文件到..."));
+
+    }
+
+    public static String viewHost(Context context){
+
+        String msg= ShellUtils.execCommand("cat /etc/hosts",false).successMsg;
+        return msg;
+    }
+
+    public static String viewFile(Context context,String path){
+
+        String msg= ShellUtils.execCommand("cat "+path,false).successMsg;
+        return msg;
     }
 
     public static void installApk(Context context){
@@ -150,6 +164,76 @@ public class InfoUtils {
 
 
     }
+
+    public static void crashPath(Context context){
+
+
+        Uri uri = Uri.parse(crash);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+
+        context.startActivity(intent);
+
+    }
+
+    public static void pgy(Context context){
+
+        Uri uri = Uri.parse(pgy);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        context.startActivity(intent);
+    }
+
+    public static void mpPath(Context context){
+
+        Uri uri = Uri.parse(mp);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        context.startActivity(intent);
+    }
+
+
+
+    public static void mpTestPath(Context context){
+
+        Uri uri = Uri.parse(mpt);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        context.startActivity(intent);
+    }
+
+    public static void bugfreePath(Context context){
+
+        Uri uri = Uri.parse(bugfree);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        context.startActivity(intent);
+    }
+
+    public static void hudsonPath(Context context){
+
+        Uri uri = Uri.parse(hudson);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        context.startActivity(intent);
+    }
+
+    public static void pkgPath(Context context){
+
+        Uri uri = Uri.parse(path);
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        context.startActivity(intent);
+    }
+
+
+    public static void openSettings(Context context){
+        // Intent intent = new Intent(Settings.ACTION_SETTINGS);
+
+        Intent intent = new Intent();
+       // ComponentName cm = new ComponentName(android.provider.Settings, Settings.ACTION_DEVICE_INFO_SETTINGS);
+      //  intent.setComponent(cm);
+        intent.setAction("android.intent.action.VIEW");
+        context.startActivity(intent);
+    }
+
+
+
+
 
 
 
